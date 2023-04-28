@@ -19,6 +19,7 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        weatherManager.delegate = self
         searchTextField.delegate = self
         
     }
@@ -34,7 +35,7 @@ class ViewController: UIViewController {
     
 }
 
-extension ViewController: UITextFieldDelegate {
+extension ViewController: UITextFieldDelegate, WeatherManagerDelegate {
    
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         searchTextField.endEditing(true)
@@ -58,5 +59,9 @@ extension ViewController: UITextFieldDelegate {
         }
         
         searchTextField.text = ""
+    }
+    
+    func didUpdateWeather(weather: WeatherModel) {
+        print(weather.temperature)
     }
 }
